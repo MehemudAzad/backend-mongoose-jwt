@@ -40,12 +40,12 @@ const getSingleCar = catchAsync(async (req, res) => {
 
 const updateSingleCar = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await CarServices.updateSingleCarFromDB(id);
+  const result = await CarServices.updateSingleCarFromDB(id, req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Car deleted successfully!',
+    message: 'Car updated successfully!',
     data: result,
   });
 });
@@ -62,16 +62,16 @@ const deleteSingleCar = catchAsync(async (req, res) => {
   });
 });
 
-const returnCar =  catchAsync(async(req,res) => {
+const returnCar = catchAsync(async (req, res) => {
   const result = await CarServices.returnCarIntoDB(req.body);
 
   sendResponse(res, {
-    statusCode : httpStatus.OK,
-    success : true,
-    message : 'Car returned successfully',
-    data : result
-  })
-})
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Car returned successfully',
+    data: result,
+  });
+});
 
 export const CarController = {
   createCar,
@@ -79,5 +79,5 @@ export const CarController = {
   getSingleCar,
   deleteSingleCar,
   updateSingleCar,
-  returnCar
+  returnCar,
 };

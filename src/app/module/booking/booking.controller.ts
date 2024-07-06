@@ -5,7 +5,7 @@ import httpStatus from 'http-status';
 
 const createBooking = catchAsync(async (req, res) => {
   //will call service function
-  console.log('from controller' , req.user);
+  console.log('from controller', req.user);
   const result = await BookingServices.bookingServiceIntoDB(req.user, req.body);
   //send response
   sendResponse(res, {
@@ -27,19 +27,19 @@ const getAllBookings = catchAsync(async (req, res) => {
   });
 });
 
-const getMyBookings = catchAsync(async(req,res)=> {
+const getMyBookings = catchAsync(async (req, res) => {
   const result = await BookingServices.getMyBookingsFromDb(req.user);
 
-  sendResponse(res,{
-    statusCode : httpStatus.OK,
-    success : true,
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
     message: 'My Bookings retrieved successfully',
-    data : result
-  })
-})
+    data: result,
+  });
+});
 
 export const BookingController = {
   createBooking,
   getAllBookings,
-  getMyBookings
+  getMyBookings,
 };

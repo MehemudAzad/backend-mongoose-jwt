@@ -18,13 +18,13 @@ const getSingleCarsFromDB = async (id: string) => {
   return result;
 };
 
-const updateSingleCarFromDB = async (id: string) => {
-  const deletedCar = await Car.findByIdAndUpdate(
+const updateSingleCarFromDB = async (id: string, payload: Partial<TCar>) => {
+  const updatedCar = await Car.findByIdAndUpdate(
     id,
-    { isDeleted: true },
-    { new: true },
+    { ...payload },
+    { new: true, runValidators: true },
   );
-  return deletedCar;
+  return updatedCar;
 };
 
 const deleteSingleCarFromDB = async (id: string) => {

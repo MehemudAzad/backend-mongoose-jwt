@@ -35,12 +35,11 @@ const carSchema = new Schema<TCar>(
     },
     isDeleted: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
   { timestamps: true },
 );
-
 
 // Query Middleware
 carSchema.pre('find', function (next) {

@@ -13,19 +13,21 @@ const createCarValidationSchema = z.object({
 });
 
 const updateCarValidationSchema = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  color: z.string().optional(),
-  isElectric: z.boolean().optional(),
-  status: z
-    .enum(['available', 'unavailable'])
-    .default('unavailable')
-    .optional(),
-  features: z.array(z.string()).optional(),
-  pricePerHour: z.number().positive().optional(),
+  body: z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    color: z.string().optional(),
+    isElectric: z.boolean().optional(),
+    status: z
+      .enum(['available', 'unavailable'])
+      .default('unavailable')
+      .optional(),
+    features: z.array(z.string()).optional(),
+    pricePerHour: z.number().positive().optional(),
+  }),
 });
 
-export const carValidations = {
+export const CarValidations = {
   createCarValidationSchema,
   updateCarValidationSchema,
 };

@@ -4,11 +4,8 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 
 const createUser = catchAsync(async (req, res) => {
-  console.log('inside controller');
-  const { user: userData } = req.body;
-  //will call service function
-  const result = await UserServices.createUserIntoDB(userData);
-  //send response
+  const result = await UserServices.createUserIntoDB(req.body);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

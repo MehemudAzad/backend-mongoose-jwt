@@ -40,7 +40,6 @@ const userSchema = new Schema<TUser>(
   { timestamps: true },
 );
 
-
 // Query Middleware
 userSchema.pre('find', function (next) {
   this.find({ isDeleted: { $ne: true } });
@@ -56,8 +55,6 @@ userSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
   next();
 });
-
-
 
 userSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -78,14 +75,12 @@ userSchema.post('save', function (doc, next) {
   next();
 });
 
-
-
 userSchema.statics.isUserExistsByCustomId = async function (id: string) {
   return await User.findOne({ _id: id }).select('+password');
   //.select('+password') adds the password field to the user that we get
 };
 userSchema.statics.isUserExistsByEmail = async function (email: string) {
-  return await User.findOne({ email : email }).select('+password');
+  return await User.findOne({ email: email }).select('+password');
   //.select('+password') adds the password field to the user that we get
 };
 

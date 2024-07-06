@@ -6,23 +6,14 @@ import config from '../../config';
 import { createToken } from './auth.utils';
 
 const loginUser = async (payload: TLoginUser) => {
-  // checking if the user is exist
-  //   const user = await User.isUserExistsByCustomId(payload._id);
-  //   console.log(user);
-  //   if (!user) {
-  //     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
-  //   }
-
   //checking if the user exists using email
   const user = await User.isUserExistsByEmail(payload.email);
-  console.log(user);
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
   }
 
   // checking if the user is already deleted
   const isDeleted = user?.isDeleted;
-
   if (isDeleted) {
     throw new AppError(httpStatus.FORBIDDEN, 'This user is deleted !');
   }
@@ -40,24 +31,14 @@ const loginUser = async (payload: TLoginUser) => {
   const accessToken = createToken(
     jwtPayload,
     config.jwt_access_secret as string,
-    '1hr',
+    '5hr',
   );
-
-  // const refreshToken = createToken(
-  //   jwtPayload,
-  //   config.jwt_refresh_secret as string,
-  //   '1d',
-  // );
 
   return {
     accessToken,
-    //   refreshToken,
-    //   needsPasswordChange: user?.needsPasswordChange,
   };
 };
 
 export const AuthServices = {
   loginUser,
-  // changePassword,
-  // refreshToken,
 };

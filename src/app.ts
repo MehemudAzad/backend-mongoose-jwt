@@ -14,23 +14,6 @@ app.use(cors());
 
 app.use('/api', router);
 
-// app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-//     if(error) {
-//         res.status(400).json({
-//             "success": false,
-//             "message": "Route not found"
-//            })
-//     }
-// });
-
-//route not found
-// app.all('*', (req, res) => {
-//   res.status(400).json({
-//     success: false,
-//     message: 'Route not found',
-//   });
-// });
-
 app.use(globalErrorHandler);
 
 //Not Found
